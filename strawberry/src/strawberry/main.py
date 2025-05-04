@@ -2,7 +2,7 @@ import sys
 import warnings
 from dotenv import load_dotenv
 import os
-os.environ["OPENAI_API_KEY"]="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"
+os.environ["OPENAI_API_KEY"]=https://github.com/mohammadmend/AGAGENT/security/secret-scanning/unblock-secret/2wcTW7cnG0EROv9xZVhMpvR33Fh
 load_dotenv("C:/Users/amend/strawberry/.env") 
 print("► OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
 import pandas as pd
