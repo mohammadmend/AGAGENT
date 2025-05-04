@@ -2,9 +2,9 @@ import sys
 import warnings
 from dotenv import load_dotenv
 import os
-os.environ["OPENAI_API_KEY"]="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"
-load_dotenv("C:/Users/amend/strawberry/.env") 
-print("► OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
+# os.environ["OPENAI_API_KEY"]="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"
+# load_dotenv("C:/Users/amend/strawberry/.env") 
+# print("► OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
 import pandas as pd
 from crewai import LLM
 from dataclasses import dataclass
