@@ -2,7 +2,7 @@ import sys
 import warnings
 from dotenv import load_dotenv
 import os
-os.environ["OPENAI_API_KEY"]="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"
+os.environ["OPENAI_API_KEY"]="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"
 load_dotenv("C:/Users/amend/strawberry/.env") 
 print("► OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
 import pandas as pd
@@ -83,7 +83,7 @@ def train():
     filename="fertilizer_model2.json"
    # n_iters   = int(sys.argv[2])
     #filename  = sys.argv[3]
-    df = pd.read_csv("C:/Users/amend/strawberry/scenarios.csv")
+    df = pd.read_csv("/Users/mohammadmendahawi/AGAGENT/strawberry/scenarios.csv")
     training_inputs = df.to_dict(orient="records")
 
     crew = Strawberry().crew()
