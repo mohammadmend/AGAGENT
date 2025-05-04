@@ -58,7 +58,6 @@ class FertilizerFlow(Flow[InputModel]):
         out = Strawberry().assess_with_image().run(inputs={
             "plan":        state.plan,
             "image_label": state.image_label,
-            **vars(state)
         })
         self.state.adjustments = out.raw
         return self.state
@@ -67,13 +66,12 @@ class FertilizerFlow(Flow[InputModel]):
     def after_assess(self, state):
         return self.unexpected if state.unexpected_event else None
 
-    @listen(after_assess)
+    @listen(after_assess)   
     def unexpected(self, state):
         out = Strawberry().handle_unexpected().run(inputs={
             "unexpected_event": state.unexpected_event,
             "adjustments":      getattr(state, "adjustments", None)
         })
-        self.state.emergency_actions = out.raw
         return self.state
 def train():
     """
