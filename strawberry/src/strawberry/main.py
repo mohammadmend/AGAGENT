@@ -40,8 +40,8 @@ class InputModel:
 class FertilizerFlow(Flow[InputModel]):
 
     @start()
-    def kickoff(self, inputs: InputModel):
-        plan_out = Strawberry().crew().kickoff(inputs=vars(inputs))
+    def kickoff(self, inputs: dict):
+        plan_out = Strawberry().crew().kickoff(inputs=inputs)
         self.state.plan = plan_out.raw["plan"]
         return self.state
 
@@ -96,9 +96,7 @@ def train():
             inputs=inp
         )
 def run():
-    """
-    Run the crew.
-    """
+ 
     inputs = InputModel(
             soil_N=120, soil_P=45, soil_K=175,
             pH=6.3, salinity=0.12,
@@ -131,14 +129,4 @@ if __name__ == "__main__":
         train()
     else:
 
-        from datetime import datetime
-        inputs = InputModel(
-            soil_N=120, soil_P=45, soil_K=175,
-            pH=6.3, salinity=0.12,
-            growth_stage="vegetative",
-            target_yield=40,
-            irrigation_method="drip",
-            fert_history="5lbN last week",
-            soil_type="silt-loam",
-        )
-        FertilizerFlow().kickoff(inputs)
+        run()
