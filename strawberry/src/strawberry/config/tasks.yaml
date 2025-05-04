@@ -1,0 +1,37 @@
+generate_plan:
+  description: >
+    Inputs:
+     • soil_N, soil_P, soil_K, pH, salinity  
+     • growth_stage, target_yield, irrigation_method, fert_history, soil_type  
+    Output a full seasonal nutrient plan (JSON) with splits per growth stage.
+  expected_output: >
+    {"plan": { "N": {...}, "P": {...}, … }}
+  agent: planner_agent
+
+assess_with_image:
+  description: >
+    Inputs:
+     • plan (from generate_plan)  
+     • image_label (e.g. "Calcium deficiency", "Magnesium deficiency","Sulfur deficiency","Copper deficiency", "Boron deficiency","Molybdenum deficiency"
+     • tissue_N, tissue_P, …  
+    Identify nutrients outside ±10% of the plan, and for each
+    output an adjustment + rationale.
+  expected_output: >
+    [{"nutrient":"N","action":"increase","amount":"5 lb/acre","why":"…”}, …]
+  agent: assessor_agent
+  context:
+    - generate_plan
+  inputs:
+    - image_label
+
+handle_unexpected:
+  description: >
+    Inputs:
+     • adjustments (from assess_with_image)  
+     • unexpected_event (e.g. "rain 50mm forecast")  
+    Recommend immediate actions to keep the crop on track.
+  expected_output: >
+    [{"action":"hold N application","reason":"…”}, …]
+  agent: responder_agent
+  inputs:
+    - unexpected_event
